@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div id="app">
+        <router-view name="header"></router-view>
+        <router-view></router-view>
+        <router-view name="footer"></router-view>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script>
+    var Body = {template: '<div> this is Body </div>'};
+    var Header = {template: '<div> this is Header </div>'};
+    var Footer = {template: '<div> this is footer </div>'};
+
+    var LoginBody = {template: '<div> this is LoginBody </div>'};
+    var LoginHeader = {template: '<div> this is LoginHeader </div>'};
+    var LoginFooter = {template: '<div> this is LoginFooter </div>'};
+
+    var router = new VueRouter({
+        routes: [
+            {
+                path: '/',
+                components:{
+                    default: Body, 
+                    header: Header,
+                    footer: Footer
+                }
+            },
+            {
+                path: '/login',
+                components: {
+                    default: LoginBody, 
+                    header: LoginHeader, 
+                    footer: LoginFooter
+                }
+            }
+
+        ]
+    });
+
+    new Vue({
+        router
+    }).$mount('#app');
+</script>
+</html>
