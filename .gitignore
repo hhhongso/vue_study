@@ -1,3 +1,5 @@
-tasks.json
+*.json
 *.tmp
 *.docx
+*.png
+*.ico

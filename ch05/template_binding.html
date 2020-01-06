@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <!--template 속성을 사용한 경우: <h3> 을 먼저 화면에 표시하고, 뷰 인스턴스가 생성되면 message의 값을 치환함.-->
+    <div id="app">
+        <h3>{{ message }} </h3>
+    </div>
+
+    <!--template 속성을 사용하지 않은 경우: <div>에 아무 내용이 없다가, 뷰 인스턴스가 생성되면 template이 달라붙어 표시됨.-->
+    <div id="app2">
+    </div>
+
+    <!-- binding 의 종류: 1) {{}} 2) v-bind 
+    v-bind:속성은 :속성으로 간소화할 수 있으나, (ex) v-bind:id => :id) 코드의 통일성과 파악 용이성을 위해 v-bind 속성을 권장한다. -->
+    <div id="app3">
+        <p v-bind:id="idA">아이디 바인딩 </p>
+        <p v-bind:class="classA">클래스 바인딩 </p>
+        <p v-bind:style="styleA">스타일 바인딩 </p>
+        
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        message: 'hello Vue.js! '
+    }
+});
+
+new Vue({
+    el: '#app2',
+    data: {
+        message: 'hello again Vue.js!'
+    },
+    template: '<h3> {{message}} </h3>'
+});
+
+new Vue({
+    el: '#app3',
+    data: {
+        idA: 10, 
+        classA: 'container',
+        styleA: 'color: blue'
+    }
+});
+</script>
+</html>

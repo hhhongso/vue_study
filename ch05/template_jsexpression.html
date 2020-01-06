@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <!-- javascript 표현식: {{}} 안에 자바스크립트 표현식을 넣어 결과를 표현한다. -->
+    <div id="app">
+        <p>{{message}}</p>
+        <p>{{message + "!!!"}}</p>
+        <p>{{message.split('').reverse().join('') }}</p>
+    </div>
+
+    <!-- 주의점*
+    1) 자바스크립트의 선언문과 분기 구문은 사용할 수 없다. (삼항연산자는 사용 가능. )
+    2) 복잡한 연산은 인스턴스 안에서 처리하고, 화면에는 간단한 연산 결과만 표시하여야 한다.  -->
+    <div id="app2">
+        {{ var a = 10; }} <!-- 선언문 사용 불가 -->
+        {{ if(true) { <!-- 분기문 사용 불가 -->
+            return 100; 
+            }
+        }}
+
+        {{ true ? 100 : 0}} <!-- 삼항연산자 사용 가능 -->
+        {{message.split('').reverse().join('') }} <!-- 복잡한 연산은 인스턴스 안에서 처리 -->
+        {{reversedMessage}} <!--script에서 computed 속성으로 계산 후, 최종 값만 표현. -->
+
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue.js~'
+    }
+});
+
+new Vue({
+    el: '#app2',
+    data: {
+        message: 'Hello Vue.js~!'
+    },
+    computed: {
+        reversedMessage: function(){
+            return this.message.split('').reverse().join('%');
+        }
+    }
+});
+</script>
+</html>
