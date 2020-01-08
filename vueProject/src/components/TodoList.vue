@@ -1,45 +1,55 @@
 <template>
   <section>
-      <ul>
-        <!--v-on:click == @click -->
-          <li v-for="(todoitem, index) in todoList" v-bind:key="todoitem" class="shadow">
-          <i class="checkBtn fa fa-check" aria-hidden="true"></i>
-           {{ todoitem }} 
-          <span type="button" class="removeBtn" @click="removeList(todoitem, index)">
-              <i class="fa fa-trash-o" aria-hidden="true"></i>
-          </span>
-          </li>
-      </ul>
+      <!-- transition-group: 목록에 애니메이션을 추가할 때 사용하는 태그. 태그 속성에 애니메이션이 들어갈 태그(ex ul, p, section, ..) 지정. 
+      목록에 애니매이션을 지정할 시, transition=group 안의 대상 태그에 :key 속성(유일하게 구분되는 값!)을 반드시 지정하여야 한다. -->
+      <transition-group name="list" tag="ul">
+        <li v-for="(todoitem, index) in propsdata" v-bind:key="todoitem" class="shadow">
+            <i class="checkBtn fa fa-check" aria-hidden="true"></i>
+            {{ todoitem }} 
+            <span type="button" class="removeBtn" @click="removeList(todoitem, index)">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </span>
+        </li>
+      </transition-group>
 
   </section>
 </template>
 
 <script>
 export default {
-    data(){
-        return {
-            todoList: []
-        }
-    },
-    created(){
-        if(localStorage.length >0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                this.todoList.push(localStorage.key(i));
-                
-            }
-        }
-    },
+    props: ['propsdata'],
+    //todoList: ['propsdata']=> App.vue에서 binding.
+    
+   
     methods: {
         removeList: function(todoitem, index){
             console.log(index, todoitem);
-            localStorage.removeItem(todoitem); //로컬 스토리지에서 해당 todoitem 삭제
-            this.todoList.splice(index, 1); // todoList 배열에서 해당 인덱스 삭제
+            this.$emit('removeTodo', todoitem, index);
         }
     }
 }
 </script>
 
 <style>
+    /* 진입/진출 트랜지션 클래스: https://kr.vuejs.org/v2/guide/transitions.html#%EA%B0%9C%EC%9A%94 */
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .list-move {
+        transition: transform 3s;
+    }
+
+    .list-enter-active, .list-leave-active {
+        transition: all 0.05s;
+    }
+
+    .list-enter, .list-leave-to {
+        opacity: 0; 
+        transform: translateY(20px);
+    }
+
     ul {
         list-style-type: none;
         padding-left: 0px; 
