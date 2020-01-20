@@ -20,15 +20,11 @@
     1) 자바스크립트의 선언문과 분기 구문은 사용할 수 없다. (삼항연산자는 사용 가능. )
     2) 복잡한 연산은 인스턴스 안에서 처리하고, 화면에는 간단한 연산 결과만 표시하여야 한다.  -->
     <div id="app2">
-        {{ var a = 10; }} <!-- 선언문 사용 불가 -->
-        {{ if(true) { <!-- 분기문 사용 불가 -->
-            return 100; 
-            }
-        }}
+      
 
-        {{ true ? 100 : 0}} <!-- 삼항연산자 사용 가능 -->
-        {{message.split('').reverse().join('') }} <!-- 복잡한 연산은 인스턴스 안에서 처리 -->
-        {{reversedMessage}} <!--script에서 computed 속성으로 계산 후, 최종 값만 표현. -->
+        {{ true ? 100 : 0}} <br> <!-- 삼항연산자 사용 가능 --> 
+        {{message.split('').reverse().join('') }}<br> <!-- 복잡한 연산은 인스턴스 안에서 처리 -->
+        {{reversedMessage}}<br> <!--script에서 computed 속성으로 계산 후, 최종 값만 표현. -->
 
 
     </div>
@@ -49,7 +45,7 @@ new Vue({
     },
     computed: {
         reversedMessage: function(){
-            return this.message.split('').reverse().join('%');
+            return this.message.split('').reverse().join('.');
         }
     }
 });

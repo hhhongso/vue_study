@@ -10,7 +10,8 @@
 </head>
 <body>
     <!--컴포넌트가 적을 때에는 유용하지만, 많은 컴포넌트를 표시하는 데에는 한계가 있음. => 네임드 뷰 -->
-    <div id="app" style="border:3px solid red;">
+    <div id="app">
+        <p>기본적으로 표시되는 부분</p>
         <router-view></router-view>
     </div>    
 </body>
@@ -19,7 +20,7 @@
 <script>
     //컴포넌트 정의
     var User = {
-        template: `<div style="border:2px dotted black;">User Component 
+        template: `<div>User Component 
                     <router-view></router-view>
                     </div>`
     };
